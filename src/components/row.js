@@ -77,7 +77,7 @@ export class Row extends React.Component {
               <Card className={this.props.classes.card}>
                 <CardMedia
                   className={this.props.classes.media}
-                  image="/images/product.jpg"
+                  image="/images/200x200.png"
                   title={product.item}
                   alt={product.item}
                 />
