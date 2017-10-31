@@ -1,15 +1,17 @@
 // @flow weak
 
 import React from 'react';
-// import PropTypes from 'prop-types';
+
 import { withStyles } from 'material-ui/styles';
+
+import PropTypes from 'prop-types';
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 import Slider from 'react-slick';
   import Grid from 'material-ui/Grid';
-import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card';
+import Card, { CardHeader, CardActions, CardContent, CardMedia } from 'material-ui/Card';
 import Button from 'material-ui/Button';
-
+import Icon from 'material-ui-icons/AddShoppingCart';
 
 
 
@@ -31,8 +33,8 @@ const styles = theme => ({
     "margin":"0px auto",
 
   },
-  ellipsis:{"fontSize":"14px","fontWeight":"500","marginTop":"15px","whiteSpace":"nowrap","overflow":"hidden","textOverflow":"ellipsis"},
-
+  // ellipsis:{"fontSize":"14px","fontWeight":"500","marginTop":"15px","whiteSpace":"nowrap","overflow":"hidden","textOverflow":"ellipsis"},
+ellipsis:{"display":"block","textOverflow":"ellipsis","wordWrap":"break-word","fontWeight":"bold","overflow":"hidden","height":"3em","maxHeight":"3em","lineHeight":"1.8em"}
 });
 
 
@@ -75,10 +77,11 @@ export class Row extends React.Component {
 
             <div key={product.prodid}>
               <Card className={this.props.classes.card}>
+                <CardHeader></CardHeader>
                 <CardMedia
                   className={this.props.classes.media}
                   image={"http://via.placeholder.com/200x200"}
-                  title={product.item}
+                  // title={product.item}
                   alt={product.item}
                 />
                 <CardContent  className={this.props.classes.ellipsis}>
@@ -96,18 +99,20 @@ export class Row extends React.Component {
                 </CardContent>
                 
                 <CardActions>
-                  <Grid item xs={5}><Button dense color="primary">
+                  <Grid item xs={9}><Button dense color="primary">
                     Share
                   </Button></Grid>
-                  <Grid item xs={6}><Button raised  color="primary" href={product.url} target="_blank">
-                    Buy Now
-                  </Button></Grid>
+                  <Grid item xs={2}><a color="accent" href={product.url} target="_blank">
+                    <Icon >add_shoppin_cart</Icon>
+                  </a>
+                   </Grid>
                 </CardActions>
               </Card>
             </div>
           ))}
           </Slider>
         </Paper>
+
       </div>
 
     );
