@@ -39,8 +39,8 @@ const styles = theme => ({
   },
   // ellipsis:{"fontSize":"14px","fontWeight":"500","marginTop":"15px","whiteSpace":"nowrap","overflow":"hidden","textOverflow":"ellipsis"},
 ellipsis:{"display":"block","textOverflow":"ellipsis","wordWrap":"break-word","fontWeight":"bold","overflow":"hidden","height":"2.2em","maxHeight":"3em","lineHeight":"1.8em"},
-price:{"color":"#ff0000","fontSize":"26px","fontWeight":"bold","paddingLeft":"20px"},
-price_difference:{"fontSize":"26px","textDecoration": "line-through"},
+price:{"color":"#ff0000","fontSize":"24px","fontWeight":"bold","paddingLeft":"10px"},
+price_difference:{"fontSize":"24px","textDecoration": "line-through"},
 bordertop:{"borderTop":"1px solid #ccc"},
 borderleft:{"borderLeft":"1px solid #ccc"},
 });
@@ -122,9 +122,11 @@ export class Row extends React.Component {
                 </CardContent>
 
                 <CardContent className >
-                   <Grid item xs={7}><span className={this.props.classes.price_difference}>{product.price + ~--product.price_diff} </span>
+                  <Grid container>
+                   <Grid item xs={9}><span className={this.props.classes.price_difference}>{product.price + ~--product.price_diff} </span>
                    <span className={this.props.classes.price}>{product.price}</span></Grid>
-                    <Grid item xs={2} >Amazon</Grid>
+                    <Grid item xs={3}>Amazon</Grid>
+                  </Grid>
                 </CardContent>
 
             
