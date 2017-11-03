@@ -11,7 +11,8 @@ import Card, { CardHeader,CardActions, CardContent, CardMedia } from 'material-u
 import Button from 'material-ui/Button';
 import Grid from 'material-ui/Grid';
 import Icon from 'material-ui-icons/AddShoppingCart';
-// import reactStringReplace from 'react-string-replace';
+
+import Divider from 'material-ui/Divider';
 
 
 
@@ -26,26 +27,40 @@ const styles = theme => ({
   }),
 
   card: {
-    maxWidth: 300,
-    minWidth: 300,
-    margin: 10,
+    maxWidth: 245,
+    minWidth: 245,
+    maxHeight:350,
+    minHeight:350,
+    margin:"0px auto",
+    marginTop:10,
+    // margin: 5,
      
   },
+
+  cardcontent:{
+   paddingTop:10,
+   paddingBottom:10,
+   paddingRight:16
+  },
+
   media: {
-    height: 300,
-    width: 300,
+    height: 185,
+    width: 138,
     "margin":"0px auto",
 
   },
-  // ellipsis:{"fontSize":"14px","fontWeight":"500","marginTop":"15px","whiteSpace":"nowrap","overflow":"hidden","textOverflow":"ellipsis"},
+
 ellipsis:{"display":"block","textOverflow":"ellipsis","wordWrap":"break-word","fontWeight":"bold","overflow":"hidden","height":"2.2em","maxHeight":"3em","lineHeight":"1.8em"},
-price:{"color":"#ff0000","fontSize":"24px","fontWeight":"bold","paddingLeft":"10px"},
-price_difference:{"fontSize":"24px","textDecoration": "line-through"},
-host:{"fontSize":"16px","fontWeight":"bold","paddingTop":"16px !important"},
+price:{"color":"#ff0000","fontSize":"20px","fontWeight":"bold","paddingLeft":"10px"},
+price_difference:{"fontSize":"20px","textDecoration": "line-through"},
+host:{"fontSize":"14px","fontWeight":"bold","marginLeft":"-5px"},
 bordertop:{"borderTop":"1px solid #ccc"},
-"cart___a":{"textDecoration":"none"},
-borderleft:{"borderLeft":"1px solid #ccc","padding": "5px","textAlign":"center"},
+"cart_a":{"textDecoration":"none","color":"#ccc !important","fontSize":"14px"},
+"cartoption":{"color":"#ccc !important"},
+borderleft:{"borderLeft":"1px solid #ccc","textAlign":"center","padding":"10px","marginTop":"-3px"},  
 });
+
+
 
 
 
@@ -56,14 +71,23 @@ const settings = {
   slidesToShow: 4,
   arrows: true,
   responsive: [{
-    breakpoint: 1024,
+    breakpoint: 1280,
     settings: {
       slidesToShow: 4,
       slidesToScroll: 4,
       infinite: true,
       dots: true
     }
-  }, {
+  }, 
+  {
+    breakpoint: 960,
+    settings: {
+      slidesToShow: 3,
+      slidesToScroll: 3,
+      infinite: true,
+     }
+  },
+  {
     breakpoint: 600,
     settings: {
       slidesToShow: 2,
@@ -80,7 +104,6 @@ const settings = {
   slidesToScroll: 1
 };
 
-// const reactStringReplace = require('react-string-replace');
 
 export class Row extends React.Component {
 
@@ -97,66 +120,59 @@ export class Row extends React.Component {
     //this.props.fetchTrakilaProducts();
   }
 
+
   render() {
     return (
 
-      <div>
-        <Paper className={this.props.classes.root} elevation={4}>
-          <Slider {...settings}>
-
+         <Grid container spacing={24}>
           {this.props.products.map(product => (
-
-            <div key={product.prodid}>
-              <Card className={this.props.classes.card}>
-                <CardHeader></CardHeader>
-                <CardMedia
+            <Grid item xs={6} sm={3} key={product.prodid}>
+               <Card className={this.props.classes.card} key={product.prodid}>
+                 <CardMedia
                   className={this.props.classes.media}
-                  image={"http://dev.trakila.com:8888/unsafe/fit-in/300x300/"+product.image}
+                  image={product.image}
                   // title={product.item}
                   alt={product.item}
                 />
                 <CardContent  className={this.props.classes.ellipsis}>
-                  <Typography  component="h3">
-                    {/*  {product.item} */}
-
-                  </Typography>
                   {product.item}
                 </CardContent>
+                <Divider></Divider>
 
-                <CardContent className >
-                  <Grid container>
-                   <Grid item xs={9}><span className={this.props.classes.price_difference}>{product.price + ~--product.price_diff} </span>
-                   <span className={this.props.classes.price}>{product.price}</span></Grid>
-                    <Grid item xs={3} className={this.props.classes.host}>Amazon</Grid>
-                  </Grid>
-                </CardContent>
-
-            
-                <CardActions className={this.props.classes.bordertop}>
-                    <Grid item xs={6} >a</Grid>
-                    <Grid item xs={6} classNames={this.props.classes.borderleft,this.props.classes.cart}><a color="accent" href={product.url} target="_blank">
-                    <Icon >add_shoppin_cart</Icon>
-                    <div>Add to Cart</div>
+                <CardContent className={this.props.classes.cardcontent} >
+                <Grid container>
+                <Grid item xs={9}><span className={this.props.classes.price_difference}>{product.price + ~--product.price_diff} </span>
+                <span className={this.props.classes.price}>{product.price}</span></Grid>
+                 <Grid item xs={3} >
+                 <Typography className={this.props.classes.host} color="secondary">
+                  Amazon
+                 </Typography>
+                 
+                </Grid>
+                </Grid> 
+             </CardContent>
+             <Divider></Divider> 
+             <CardActions classNames={this.props.classes.bordertop,this.props.classes.cartoption}>
+                  <Grid item xs={6} ></Grid>
+                  <Grid item xs={6} className={this.props.classes.borderleft}><a className={this.props.classes.cart_a} href={product.url} target="_blank">
+                    <Icon >shopping_cart</Icon>
+                    
                   </a>
                    </Grid>
                 </CardActions>
               </Card>
-            </div>
-          ))}
-          </Slider>
-        </Paper>
+              </Grid>
+           ))}
+           </Grid>
 
-      </div>
+ 
 
     );
   }
 }
 
-
-// <CardContent>
-                //   Reduced By : {product.price} {product.price_diff}
-                // </CardContent>
-
+// <!-- <div>Add to Cart</div> -->
+ // {product.host}
 // const msp = (state) => {
 //   return {
 //     product: state.data,
