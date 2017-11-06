@@ -15,10 +15,6 @@ import Icon from 'material-ui-icons/AddShoppingCart';
 import Divider from 'material-ui/Divider';
 
 
-
-
-
-
 const styles = theme => ({
   root: theme.mixins.gutters({
     paddingTop: 8,
@@ -31,15 +27,15 @@ const styles = theme => ({
     minWidth: 245,
     maxHeight:350,
     minHeight:350,
-    margin:"0px auto",
-    marginTop:10,
-    // margin: 5,
+    
+    margin: 5,
      
   },
 
   cardcontent:{
-   paddingTop:10,
-   paddingBottom:10,
+   paddingTop:4,
+   paddingBottom:4,
+   paddingLeft:16,
    paddingRight:16
   },
 
@@ -49,15 +45,14 @@ const styles = theme => ({
     "margin":"0px auto",
 
   },
-
 ellipsis:{"display":"block","textOverflow":"ellipsis","wordWrap":"break-word","fontWeight":"bold","overflow":"hidden","height":"2.2em","maxHeight":"3em","lineHeight":"1.8em"},
 price:{"color":"#ff0000","fontSize":"20px","fontWeight":"bold","paddingLeft":"10px"},
 price_difference:{"fontSize":"20px","textDecoration": "line-through"},
 host:{"fontSize":"14px","fontWeight":"bold","marginLeft":"-5px"},
 bordertop:{"borderTop":"1px solid #ccc"},
-"cart_a":{"textDecoration":"none","color":"#ccc !important","fontSize":"14px"},
-"cartoption":{"color":"#ccc !important"},
-borderleft:{"borderLeft":"1px solid #ccc","textAlign":"center","padding":"10px","marginTop":"-3px"},  
+"cart_a":{"textDecoration":"none","color":"#6d6c6c !important","fontSize":"14px"},
+"cartoption":{"color":"#6d6c6c !important"},
+borderleft:{"borderLeft":"1px solid #ccc","textAlign":"center","padding":"6px","marginTop":"-15px"},  
 });
 
 
@@ -123,14 +118,14 @@ export class Row extends React.Component {
 
   render() {
     return (
-
-         <Grid container spacing={24}>
+         <Grid container  justify="center" className={"maingrid"} >
+            <Grid item  container item xs={6} xl={12} sm={12} md={10}  justify="center" className={"productgrid"}>
           {this.props.products.map(product => (
-            <Grid item xs={6} sm={3} key={product.prodid}>
+            <Grid item xs={12} xs={6} sm={4} md={3}  key={product.prodid} className={"product"}>
                <Card className={this.props.classes.card} key={product.prodid}>
                  <CardMedia
                   className={this.props.classes.media}
-                  image={product.image}
+                  image={"http://dev.trakila.com:8888/unsafe/fit-in/185x138/"+product.image}
                   // title={product.item}
                   alt={product.item}
                 />
@@ -140,16 +135,14 @@ export class Row extends React.Component {
                 <Divider></Divider>
 
                 <CardContent className={this.props.classes.cardcontent} >
-                <Grid container>
-                <Grid item xs={9}><span className={this.props.classes.price_difference}>{product.price + ~--product.price_diff} </span>
+                <Grid item xs={12}><span className={this.props.classes.price_difference}>{product.price + ~--product.price_diff} </span>
                 <span className={this.props.classes.price}>{product.price}</span></Grid>
-                 <Grid item xs={3} >
-                 <Typography className={this.props.classes.host} color="secondary">
-                  Amazon
+                 <Grid item xs={2} >
+                 <Typography type="subheading" color="secondary">
+                   {product.host}
                  </Typography>
                  
                 </Grid>
-                </Grid> 
              </CardContent>
              <Divider></Divider> 
              <CardActions classNames={this.props.classes.bordertop,this.props.classes.cartoption}>
@@ -164,6 +157,8 @@ export class Row extends React.Component {
               </Grid>
            ))}
            </Grid>
+           </Grid>
+
 
  
 
@@ -171,8 +166,9 @@ export class Row extends React.Component {
   }
 }
 
-// <!-- <div>Add to Cart</div> -->
- // {product.host}
+
+
+
 // const msp = (state) => {
 //   return {
 //     product: state.data,

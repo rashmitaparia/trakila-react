@@ -22,13 +22,13 @@ export function getTrakilaData(bool) {
   }
 }
 
-export function fetchTrakilaProducts() {
-  console.log("fetchTrakilaProduct","https://api.trakila.com/product/diff/?page=1" )
+export function fetchTrakilaProducts(page) {
+  console.log("fetchTrakilaProduct","https://api.trakila.com/product/diff/?page="+page )
   return (dispatch) => {
-    console.log("getTrakilaData","https://api.trakila.com/product/diff/?page=1" )
+    console.log("getTrakilaData","https://api.trakila.com/product/diff/?page=1"+page )
     
    dispatch(getTrakilaData(true))
-    return fetch("https://api.trakila.com/product/diff/?page=1" )
+    return fetch("https://api.trakila.com/product/diff/?page="+page )
     .then((response) => {
       console.log("response---------",response)
                 if (!response.ok) {

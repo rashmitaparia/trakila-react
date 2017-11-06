@@ -13,6 +13,7 @@ import withRoot from '../components/withRoot';
 import ButtonAppBar from '../components/header';
 import Row from '../components/row';
 import { connect } from 'react-redux';
+import Grid from 'material-ui/Grid';
 
 import withWidth from 'material-ui/utils/withWidth';
 
@@ -24,10 +25,15 @@ import {
   fetchTrakilaProducts,
 } from '../actions'
 
-
-const styles = {
+const styles = theme => ({
+  loadmore:{"textAlign":"center","marginTop":"20px","marginBottom":"20px"}
+});
+// const styles = {
    
-};
+// };
+
+var page = 1;
+var allproducts = [];
 
 class Index extends Component {
   state = {
@@ -36,7 +42,8 @@ class Index extends Component {
 
   componentDidMount() {
         console.log("this.props",this.props);
-        this.props.fetchTrakilaProducts();
+        this.props.fetchTrakilaProducts(page);
+        allproducts =   allproducts.concat(this.props.offerdata)
       }
 
   handleRequestClose = () => {
@@ -44,6 +51,14 @@ class Index extends Component {
       open: false,
     });
   };
+
+  more = () => {
+    console.log("more",allproducts);    
+    page++;
+    this.props.fetchTrakilaProducts(page);
+    allproducts = allproducts.concat(this.props.offerdata)
+
+  }
 
   handleClick = () => {
     this.setState({
@@ -57,8 +72,13 @@ console.log(this.props)
     return (
         <span>
          <ButtonAppBar/> 
-        <Row products={this.props.offerdata}/>
-      </span>
+        <Row products={allproducts.concat(this.props.offerdata)}/>
+        <Grid container  justify="center" className={"maingrid"} >
+        <Button raised color="primary"  onClick={this.more} className={this.props.classes.loadmore}>
+        Load More
+      </Button>
+      </Grid>   
+         </span>
 
     );
   }
@@ -81,7 +101,7 @@ const msp = (state) => {
 
 const mdp = (dispatch) => {
   return {
-    fetchTrakilaProducts: () => dispatch(fetchTrakilaProducts())
+    fetchTrakilaProducts: (page) => dispatch(fetchTrakilaProducts(page))
   };
 };
 
